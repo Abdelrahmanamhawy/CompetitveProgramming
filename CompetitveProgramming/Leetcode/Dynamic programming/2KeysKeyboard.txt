@@ -1,0 +1,42 @@
+def minSteps(n):
+        
+        #First step,input the constants:
+        #From n=0..5,output is n ;
+    dp=[0 for i in range(n)]
+    for i in range(6):
+        dp[i]=i
+        #Second,from n=5..n,the output is the sum of the minemum greadest divsor.
+        #So for n=6...steps are dp[3]+dp[2],which is equal to 5 . 
+        #To write this in code means :
+    s=1000
+    for i in range(6,n+1): 
+        s=i
+        if n%i==1:
+            dp[i]=0
+        else:
+            for x in range(i):
+                for j in range(x+1,i):
+                    if dp[x]*dp[j]==i:
+                        s=min(s,dp[x]+dp[j])
+                    elif dp[x]*dp[x]==i:
+                        s=min(s,dp[x]+dp[x])
+            dp[i]=s    
+            #if n%dp[i]==0:
+            #dp[i]=min(s,equalDivsors(dp,i))
+    print(dp[6])
+        
+        
+    
+def equalDivsors(dp,i):
+    s=i
+    for x in range(i):
+        for j in range(x+1,i):
+            if dp[x]*dp[j]==i:
+                s=min(s,dp[x]+dp[j])
+            elif dp[x]*dp[x]==i:
+                s=min(s,dp[x]+dp[x])
+            
+    return s
+                        
+           
+print (minSteps(12))        
